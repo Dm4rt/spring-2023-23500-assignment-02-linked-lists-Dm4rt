@@ -16,7 +16,7 @@ int main()
   try {
     l->insert(10,"x");
   } catch (std::exception e){
-    std::cout <<"Insert x didn't work\n";
+    std::cout <<"Insert at x didn't work\n";
   }
  std::cout<<"1 is true and 0 is false \n Contains c ="<<l->contains("c")<<std::endl;
   std::cout<<"Contains f ="<<l->contains("f")<<std::endl;
@@ -34,7 +34,7 @@ int main()
   o->insert("65");
   o->insert("8");
   std::cout<< o->toString()<<" "<<o->getLength()<< "\n";
-  o->reverse();
+  //o->reverse();
   std::cout<< o->toString()<<" "<<o->getLength()<< "\n";
 
   return 0;

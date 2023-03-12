@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Node.h"
+#include <string>
 #include "OList.h"
 
 OList::OList(){
@@ -21,38 +22,45 @@ OList::~OList(){
   
   
 }
-
-// insert at the "front" (head)
 void OList::insert(std::string data){
+  int loc=length;
+  for(int x=0;x<length;x++){
+  	if(stoi(data)<stoi(get(x))){
+  		loc=x;
+  		break;
+  	}
+  }
   Node *walker, *trailer;
   walker = this->head; // start of the list
   trailer = nullptr; // one behind
   
-  while(walker != nullptr&&stoi(walker->getData())>stoi(data)){
-    
+  while(loc>0 && walker != nullptr){
+    loc=loc-1;
+
+    /* trailer will always be one node
+       behind walker */
     trailer=walker;
     walker = walker->getNext();
     
   }
-
-  // At this point, trailer points to the Node
-  // BEFORE where we want to insert
+  
+  //Make sure no out of bounds
+  if (loc > 0){
+    throw std::out_of_range("Our insert is out of range");
+  }
 
   Node *newNode = new Node(data);
-  // Inserting at true location 0
-  // will have trailer == nullptr
-  // - we have to treat that as a special case
+  //If at loc 0, or trailer = 0;
   if (trailer == nullptr){
     newNode->setNext(head);
     head = newNode;
   } else {
-    // do the regular case 
     newNode->setNext(walker);
     trailer->setNext(newNode);
   }
+  
+  //make sure to increment length
   length++;
-  delete walker;
-  delete trailer;
 }
 
 bool OList::contains(std::string item){
