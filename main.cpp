@@ -34,7 +34,8 @@ int main()
   o->insert("65");
   o->insert("8");
   std::cout<< o->toString()<<" "<<o->getLength()<< "\n";
-  //o->reverse();
+  std::cout<<"Reversing..."<<std::endl;
+  o->reverse();
   std::cout<< o->toString()<<" "<<o->getLength()<< "\n";
 
   return 0;

@@ -6,6 +6,7 @@ class OList{
  private:
   Node *head;
   int length;
+  bool increase;
  public:
   OList();
   ~OList();

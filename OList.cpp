@@ -6,6 +6,11 @@
 OList::OList(){
   head = nullptr;
   length=0;
+  
+  //used in insert to determine if we 
+  //want to insert in increasing or
+  //decreasing order
+  increase=true;
 }
 
 OList::~OList(){
@@ -25,7 +30,11 @@ OList::~OList(){
 void OList::insert(std::string data){
   int loc=length;
   for(int x=0;x<length;x++){
-  	if(stoi(data)<stoi(get(x))){
+  	if(increase&&stoi(data)<stoi(get(x))){
+  		loc=x;
+  		break;
+  	}
+  	if(increase==false&&stoi(data)>stoi(get(x))){
   		loc=x;
   		break;
   	}
@@ -114,7 +123,7 @@ void OList::remove(int loc){
     trailer->setNext(walker->getNext());
     delete walker;
   }
-  
+  length--;
 
 }
 
@@ -135,21 +144,10 @@ int OList::getLength(){
 	return this->length;
 }
 void OList::reverse(){
-	Node *walker, *trailer;
-	  walker = this->head; // start of the list
-	  trailer = nullptr; // one behind
-	  int curInd=length-1;
-	  
-	  while(walker != nullptr&&curInd>length/2){
-	    
-	    trailer=walker;
-	    Node *newNode = new Node(get(curInd));
-		    newNode->setNext(walker);
-		    trailer->setNext(newNode);
-	    walker = walker->getNext();
-	    curInd++;
-		    
+	increase= !increase;
+	  for(int x=0;x<length;x++){
+	  	std::string tmp = get(length-1);
+	  	remove(length-1);
+	  	insert(tmp);
 	  }
-	delete walker;
-	delete trailer;
 }
