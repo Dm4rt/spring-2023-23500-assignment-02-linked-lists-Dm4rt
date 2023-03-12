@@ -1,5 +1,6 @@
 #include <iostream>
 #include "List.h"
+#include "OList.h"
 
 int main()
 {
@@ -23,7 +24,18 @@ int main()
   std::cout<<"removing f"<<std::endl;
  std::cout<<"Contains f ="<<l->contains("f")<<std::endl;
   delete l;
-
+  
+  OList *o = new OList();
+  std::cout<< o->toString()<<" "<<o->getLength()<< "\n";
+  o->insert("15");
+  std::cout<< o->toString()<<" "<<o->getLength()<< "\n";
+  o->insert("79");
+  o->insert("42");
+  o->insert("65");
+  o->insert("8");
+  std::cout<< o->toString()<<" "<<o->getLength()<< "\n";
+  o->reverse();
+  std::cout<< o->toString()<<" "<<o->getLength()<< "\n";
 
   return 0;
 }
